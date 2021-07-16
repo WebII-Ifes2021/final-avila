@@ -1,0 +1,28 @@
+<form [formGroup]="pasajeForm" name="pasajeForm">
+    <h3>Nombre: </h3>
+    <mat-form-field appearance="legacy">
+        <mat-label>Nombre</mat-label>
+        <input formControlName="nombre" matInput placeholder="Nombre ">
+    </mat-form-field>
+
+    <h3>Fecha de Destino:</h3>
+    <mat-form-field appearance="fill">
+        <mat-label>Fecha de Destino</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaDestino">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+    <h3>Precio: </h3>
+    <mat-form-field appearance="legacy">
+        <mat-label>Precio</mat-label>
+        <input formControlName="precio" matInput placeholder="Precio del pasaje">
+    </mat-form-field>
+
+</form>
+
+<button (click)="guardar()">Guardar</button>
+<div *ngIf="pasaje"> 
+    <app-detalle [pasajeComponent]="pasaje" (eventPreFinal)="onRecibe($event)"></app-detalle>
+</div>
+<h2 *ngIf="mostrar">{{pasajeForm.value.nombre}} .... el precio final de su pasaje es de: ${{precioFinal}}</h2>
